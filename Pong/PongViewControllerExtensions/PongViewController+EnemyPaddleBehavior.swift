@@ -3,25 +3,20 @@
 import Foundation
 import UIKit
 
-// NOTE: В этом расширении класса определены функции,
-// которые отвечают за настройку логики платформы противника.
+
 extension PongViewController {
 
-    // MARK: - Enemy Paddle Follow Behavior
 
-    /// Эта функция включает логику "преследования" мяча платформой противника
     func enableEnemyPaddleFollowBehavior() {
         let updatesPerSecond: TimeInterval = 24
         let timePerFrame: TimeInterval = 1.0 / updatesPerSecond
 
-        // NOTE: Создаем таймер которые вызывается 24 раза в секунду
         enemyPaddleUpdateTimer = Timer.scheduledTimer(
             withTimeInterval: timePerFrame,
             repeats: true
         ) { [weak self] _ in
             guard let self = self else { return }
 
-            // NOTE: Считаем тики таймера и "замедляем" платформу противника
             self.enemyPaddleUpdatesCounter += 1
             var diffFactor: CGFloat = 1.0
             if self.enemyPaddleUpdatesCounter == 8 {
